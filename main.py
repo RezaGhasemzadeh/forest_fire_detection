@@ -1,8 +1,9 @@
 import cv2 
-from sklearn.model_selection import train_test_split
 import glob
+from sklearn.model_selection import train_test_split
 
 data = []
+labels = []
 
 
 def preprocessing(add):
@@ -12,10 +13,12 @@ def preprocessing(add):
     img = img/255.0
     # Transforming the matrix into a feature vector(each pixel is a feature)
     img = img.flatten()
-    return img
+    label = add.split('\\')[2].split('.')[0]
+    return img, label
 
 
 for address in glob.glob("fire_dataset\\*\\*"):
-    image = preprocessing(address)
+    image, label = preprocessing(address)
     data.append(image)
+    labels.append(label)
      
