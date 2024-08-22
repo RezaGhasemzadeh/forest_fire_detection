@@ -11,4 +11,4 @@ One of the main issues with this method is that the spatial relationships betwee
 
 Moreover, KNN might not be the best choice when dealing with large datasets with a substantial number of features due to the computational expense of calculating distances between samples (typically using Euclidean distance).  
 
-In the use_model.py I loaded the model and tested it with some new images
+In the use_model.py I loaded the model and tested it with some new images that are saved in test_images folder
