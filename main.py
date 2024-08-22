@@ -2,6 +2,8 @@ import cv2
 import glob
 from sklearn.model_selection import train_test_split
 import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+from joblib import dump
 
 
 def preprocessing(add):
@@ -26,11 +28,20 @@ def load_data():
             print(f"{i}/998 processed")
 
     # Because sklearn only accepts numpy arrays or pandas dataframes, we convert our list to 
-    # a numpy array but there is not need to convert labels to array
+    # a numpy array but there is no need to convert labels to array
     data = np.array(data)
     train_features, test_features, train_labels, test_labels = train_test_split(data, labels, test_size=0.2)
     return train_features, test_features, train_labels, test_labels
 
 
-train_features, test_features, train_labels, test_labels = load_data()
+def train():
+    train_features, test_features, train_labels, test_labels = load_data()
+    knn_classifier = KNeighborsClassifier()
+    knn_classifier.fit(train_features, train_labels)
+    dump(knn_classifier, "fire_detection.z")
+    accuracy = knn_classifier.score(test_features, test_labels)
+    print(f"accuracy: {accuracy*100}")
+
+
+train()
 
